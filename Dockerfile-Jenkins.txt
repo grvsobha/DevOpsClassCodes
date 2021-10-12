@@ -1,0 +1,16 @@
+rm -rf docker
+# Create a Directory
+mkdir docker
+cd docker
+# copy the .war file into the current directory
+cp /var/lib/jenkins/workspace/package/target/addressbook.war .
+# Create Dockerfile
+touch dockerfile
+cat <<EOT>> dockerfile
+FROM tomcat
+ADD addressbook.war/user/local/tomcat/webapps
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+EOT
+sudo docker build -t myproject:$BUILD_NUMBER .
+sudo docker run -dt -P myproject:$BUILD_NUMBER
