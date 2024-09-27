@@ -1,4 +1,5 @@
-pipeline{     
+pipeline{ 
+
   tools{
       jdk 'java'
       maven 'maven'
